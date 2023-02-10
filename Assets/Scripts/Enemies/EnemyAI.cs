@@ -14,10 +14,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float _detectionRadius;
 
     [Header("Wandering parameters")]
-    [SerializeField] float _wanderingWaitTimeMin;
-    [SerializeField] float _wanderingWaitTimeMax;
-    [SerializeField] float _wanderingDistanceMin;
-    [SerializeField] float _wanderingDistanceMax;
+    [SerializeField] private float _wanderingWaitTimeMin;
+    [SerializeField] private float _wanderingWaitTimeMax;
+    [SerializeField] private float _wanderingDistanceMin;
+    [SerializeField] private float _wanderingDistanceMax;
     private bool _hasDestination;
 
     #region Life cycle
@@ -26,16 +26,17 @@ public class EnemyAI : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
-    async void Update()
+    private void Update()
     {
         if (Vector3.Distance(_player.position, transform.position) < _detectionRadius)
         {
-      _agent.SetDestination(_player.position);
-        } else
+            _agent.SetDestination(_player.position);
+        }
+        else
         {
             if (_agent.remainingDistance < 0.75f && !_hasDestination)
             {
@@ -46,7 +47,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
+
     }
     #endregion
 
@@ -57,7 +58,7 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(_wanderingWaitTimeMin, _wanderingWaitTimeMax));
 
         Vector3 nextDestination = transform.position;
-        nextDestination +=  Random.Range(_wanderingDistanceMin,_wanderingDistanceMax) *new Vector3(Random.Range(-1, 1), 0f, Random.Range(-1, 1)).normalized;
+        nextDestination += Random.Range(_wanderingDistanceMin, _wanderingDistanceMax) * new Vector3(Random.Range(-1, 1), 0f, Random.Range(-1, 1)).normalized;
 
         NavMeshHit hit;
         if (NavMesh.SamplePosition(nextDestination, out hit, _wanderingDistanceMax, NavMesh.AllAreas))
@@ -73,5 +74,5 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _detectionRadius);
     }
 
-    
+
 }

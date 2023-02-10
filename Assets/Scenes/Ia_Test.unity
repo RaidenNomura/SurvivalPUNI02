@@ -620,25 +620,9 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1695008430}
-    - target: {fileID: 1579659458, guid: adc4219d227086a4197e9ba15a0c28b4, type: 3}
-      propertyPath: _detectionRadius
-      value: 4.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 1579659458, guid: adc4219d227086a4197e9ba15a0c28b4, type: 3}
-      propertyPath: _wanderingDistanceMax
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1579659458, guid: adc4219d227086a4197e9ba15a0c28b4, type: 3}
-      propertyPath: _wanderingDistanceMin
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1579659458, guid: adc4219d227086a4197e9ba15a0c28b4, type: 3}
-      propertyPath: _wanderingWaitTimeMax
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1579659458, guid: adc4219d227086a4197e9ba15a0c28b4, type: 3}
-      propertyPath: _wanderingWaitTimeMin
-      value: 1
+    - target: {fileID: 919132148477850685, guid: adc4219d227086a4197e9ba15a0c28b4, type: 3}
+      propertyPath: m_Name
+      value: graphic
       objectReference: {fileID: 0}
     - target: {fileID: 4910363173983503276, guid: adc4219d227086a4197e9ba15a0c28b4, type: 3}
       propertyPath: m_RootOrder
