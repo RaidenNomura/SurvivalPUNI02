@@ -44,8 +44,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 6
+  m_Speed: 1
+  m_Acceleration: 2
   avoidancePriority: 50
   m_AngularSpeed: 280
   m_StoppingDistance: 0
@@ -70,11 +70,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agent: {fileID: 1579659457}
   _player: {fileID: 0}
+  _animator: {fileID: 5866666020443550973}
   _detectionRadius: 4.76
-  _wanderingWaitTimeMin: 1
-  _wanderingWaitTimeMax: 3
-  _wanderingDistanceMin: 2
-  _wanderingDistanceMax: 6
+  _walkSpeed: 2
+  _chaseSpeed: 4
+  _attackRadius: 1
+  _attackDelay: 2.617
+  _damageDealt: 20
+  _wanderingWaitTimeMin: 2
+  _wanderingWaitTimeMax: 5
+  _wanderingDistanceMin: 3
+  _wanderingDistanceMax: 5
 --- !u!1001 &1604634988
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,12 +134,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 81c0e1e4099d17740aa088ee2ad8202d, type: 3}
       propertyPath: m_Name
-      value: copzombie_l_actisdato
+      value: graphic
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 81c0e1e4099d17740aa088ee2ad8202d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 892c35fb92ed7554f990288f07cf148e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81c0e1e4099d17740aa088ee2ad8202d, type: 3}
 --- !u!4 &543450652128947847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 81c0e1e4099d17740aa088ee2ad8202d, type: 3}
+  m_PrefabInstance: {fileID: 1604634988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5866666020443550973 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 81c0e1e4099d17740aa088ee2ad8202d, type: 3}
   m_PrefabInstance: {fileID: 1604634988}
   m_PrefabAsset: {fileID: 0}

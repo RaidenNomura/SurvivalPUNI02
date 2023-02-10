@@ -7,18 +7,30 @@ using UnityEngine.InputSystem.HID;
 public class EnemyAI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] NavMeshAgent _agent;
-    [SerializeField] Transform _player;
+    [SerializeField] private NavMeshAgent _agent;
+    [SerializeField] private Transform _player;
+    [SerializeField] private Animator _animator;
+    // [SerializeField] Player _playerHp;
 
     [Header("Stats")]
-    [SerializeField] float _detectionRadius;
+    [SerializeField] private float _detectionRadius;
+    [SerializeField] private float _walkSpeed;
+    [SerializeField] private float _chaseSpeed;
+    [SerializeField] private float _attackRadius;
+    [SerializeField] private float _attackDelay;
+    [SerializeField] private float _damageDealt;
+    [SerializeField] private float _rotationSpeed;
 
     [Header("Wandering parameters")]
     [SerializeField] private float _wanderingWaitTimeMin;
     [SerializeField] private float _wanderingWaitTimeMax;
     [SerializeField] private float _wanderingDistanceMin;
     [SerializeField] private float _wanderingDistanceMax;
+
+    #region Privates
     private bool _hasDestination;
+    private bool _isAttacking;
+    #endregion
 
     #region Life cycle
     private void Awake()
@@ -29,22 +41,38 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Vector3.Distance(_player.position, transform.position) < _detectionRadius)
         {
-            _agent.SetDestination(_player.position);
+            _agent.speed = _chaseSpeed;
+
+            Quaternion rot = Quaternion.LookRotation(_player.position - transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, _rotationSpeed * Time.deltaTime);  
+            if (!_isAttacking)
+            {
+                if (Vector3.Distance(_player.position, transform.position) < _attackRadius)
+                {
+                    StartCoroutine(AttackPlayer());
+                }
+                else
+                {
+                    _agent.SetDestination(_player.position);
+                }
+            }
+
         }
         else
         {
+            _agent.speed = _walkSpeed;
             if (_agent.remainingDistance < 0.75f && !_hasDestination)
             {
                 StartCoroutine(GetNewDestination());
             }
         }
-
+        _animator.SetFloat("Speed", _agent.velocity.magnitude);
     }
+
     private void FixedUpdate()
     {
 
@@ -68,10 +96,26 @@ public class EnemyAI : MonoBehaviour
         _hasDestination = false;
     }
 
+    IEnumerator AttackPlayer()
+    {
+        _isAttacking = true;
+        _agent.isStopped = true;
+
+        _animator.SetTrigger("Attack");
+        // _playerHp.TakeDamage(_damageDealt);
+
+        yield return new WaitForSeconds(_attackDelay);
+        _agent.isStopped = false;
+        _isAttacking = false;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _detectionRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, _attackRadius);
     }
 
 
