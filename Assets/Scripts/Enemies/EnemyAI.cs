@@ -35,13 +35,14 @@ public class EnemyAI : MonoBehaviour
     #region Life cycle
     private void Awake()
     {
+        gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
     }
     void Start()
     {
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Vector3.Distance(_player.position, transform.position) < _detectionRadius)
         {
@@ -73,10 +74,7 @@ public class EnemyAI : MonoBehaviour
         _animator.SetFloat("Speed", _agent.velocity.magnitude);
     }
 
-    private void FixedUpdate()
-    {
 
-    }
     #endregion
 
 
