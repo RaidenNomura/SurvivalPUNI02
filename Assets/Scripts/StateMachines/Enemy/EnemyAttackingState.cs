@@ -13,7 +13,7 @@ public class EnemyAttackingState : EnemyBaseState
 
     public override void Enter()
     {
-        Debug.Log("je suis dans attack");
+        _stateMachine._weapon.SetAttack(550);
         _stateMachine._animator.CrossFadeInFixedTime(_attackHash, _transitionDuration);
     }
 
