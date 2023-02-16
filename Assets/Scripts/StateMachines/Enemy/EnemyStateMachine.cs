@@ -13,6 +13,8 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver _forceReceiver { get; private set; }
 
     [field: SerializeField] public NavMeshAgent _agent { get; private set; }
+
+    [field: SerializeField] public WeaponDamage _weapon { get; private set; }
     [field: SerializeField] public float _movementSpeed { get; private set; }
     [field: SerializeField] public float _playerChasingRange { get; private set; }
 
